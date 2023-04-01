@@ -45,6 +45,7 @@ public final class Message {
         vlayout.setOrientation(LinearLayout.VERTICAL);
         vlayout.setLayoutParams(params);
         vlayout.setPadding(25, 20, 25, 20);
+        vlayout.setElevation(5f);
 
         vtitle = new TextView(context);
         vtitle.setTypeface(Typeface.DEFAULT_BOLD);
