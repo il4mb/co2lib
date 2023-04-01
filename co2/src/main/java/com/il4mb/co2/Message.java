@@ -31,19 +31,22 @@ public final class Message {
 
     private Context context;
     private LinearLayout vlayout;
+    private FrameLayout vwrapper;
     private TextView vtitle, vtext;
 
     public Message(Context context) {
 
         this.context = context;
 
-        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        params.setMargins(25, 0, 25, 0);
+        vwrapper = new FrameLayout(context);
+        vwrapper.setBackground(new ColorDrawable(Color.TRANSPARENT));
+        vwrapper.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        vwrapper.setPadding(35, 0, 35, 0);
 
         vlayout = new LinearLayout(context);
         vlayout.setBackground(new Co2Drawable(Color.WHITE, new Co2Corners(corners)));
         vlayout.setOrientation(LinearLayout.VERTICAL);
-        vlayout.setLayoutParams(params);
+        vlayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         vlayout.setPadding(25, 20, 25, 20);
         vlayout.setElevation(5f);
 
@@ -104,11 +107,13 @@ public final class Message {
             vlayout.addView(vtext);
         }
 
+        vwrapper.addView(vlayout);
+
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL | Gravity.FILL_HORIZONTAL, 0, 25);
 
         toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(vlayout);
+        toast.setView(vwrapper);
         toast.show();
     }
 

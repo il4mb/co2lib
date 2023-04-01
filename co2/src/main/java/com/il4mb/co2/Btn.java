@@ -92,6 +92,13 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
         }
     }
 
+    public void setCorners(Corners corners) {
+        this.rounded = corners;
+    }
+    public Corners getCorners() {
+        return rounded;
+    }
+
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
