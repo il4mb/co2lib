@@ -37,6 +37,6 @@ allprojects {
 
 ```java
 dependencies {
-	implementation 'com.github.il4mb:AndroidView:Tag'
+	implementation 'com.github.il4mb:co2lib:0.1'
 }
 ```
