@@ -39,6 +39,7 @@ public final class Message {
         vlayout.setBackground(drawable);
         vlayout.setOrientation(LinearLayout.VERTICAL);
         vlayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        vlayout.setPadding(20, 15, 20, 15);
 
         vtitle = new TextView(context);
         vtitle.setTypeface(Typeface.DEFAULT_BOLD);
@@ -81,7 +82,10 @@ public final class Message {
 
         vtitle.setTextColor(this.theme.Title);
         vtext.setTextColor(this.theme.Text);
-        vlayout.setBackgroundTintList(ColorStateList.valueOf(this.theme.Background));
+
+        ColorDrawable drawable = new ColorDrawable();
+        drawable.setColor(this.theme.Background);
+        vlayout.setBackground(drawable);
 
         if(this.title != null) {
             vtitle.setVisibility(View.VISIBLE);
