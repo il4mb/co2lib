@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Btn">
+        <attr name="rounded" format="integer"/>
+        <attr name="rounded_left" format="integer"/>
+        <attr name="rounded_top" format="integer"/>
+        <attr name="rounded_right" format="integer"/>
+        <attr name="rounded_bottom" format="integer"/>
+        <attr name="rounded_left_top" format="integer"/>
+        <attr name="rounded_left_bottom" format="integer"/>
+        <attr name="rounded_right_top" format="integer"/>
+        <attr name="rounded_right_bottom" format="integer"/>
+    </declare-styleable>
+</resources>

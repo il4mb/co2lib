@@ -1,4 +1,4 @@
-package com.il4mb.co2;
+package com.il4mb.co2lib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.il4mb.co2.util.Corners;
+import com.il4mb.co2lib.util.Corners;
 
 public class Btn extends androidx.appcompat.widget.AppCompatButton {
 
