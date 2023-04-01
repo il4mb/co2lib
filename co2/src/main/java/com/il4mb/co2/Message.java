@@ -9,12 +9,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import com.il4mb.co2.util.Co2Corners;
+import com.il4mb.co2.util.Co2Drawable;
+import com.il4mb.co2.util.Corners;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 public final class Message {
 
     public String title, text;
+    public int corners = 15;
     private Theme theme;
 
     private Context context;
@@ -33,13 +37,14 @@ public final class Message {
 
         this.context = context;
 
-        ColorDrawable drawable = new ColorDrawable();
-        drawable.setColor(Color.TRANSPARENT);
+        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.setMargins(25, 0, 25, 0);
+
         vlayout = new LinearLayout(context);
-        vlayout.setBackground(drawable);
+        vlayout.setBackground(new Co2Drawable(Color.WHITE, new Co2Corners(corners)));
         vlayout.setOrientation(LinearLayout.VERTICAL);
-        vlayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        vlayout.setPadding(20, 15, 20, 15);
+        vlayout.setLayoutParams(params);
+        vlayout.setPadding(25, 20, 25, 20);
 
         vtitle = new TextView(context);
         vtitle.setTypeface(Typeface.DEFAULT_BOLD);
@@ -83,8 +88,8 @@ public final class Message {
         vtitle.setTextColor(this.theme.Title);
         vtext.setTextColor(this.theme.Text);
 
-        ColorDrawable drawable = new ColorDrawable();
-        drawable.setColor(this.theme.Background);
+        Co2Drawable drawable = new Co2Drawable(Color.WHITE, new Co2Corners(corners));
+        drawable.setTintList(ColorStateList.valueOf(this.theme.Background));
         vlayout.setBackground(drawable);
 
         if(this.title != null) {

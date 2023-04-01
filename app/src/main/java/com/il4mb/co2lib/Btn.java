@@ -17,10 +17,6 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
 
     Corners rounded;
 
-    public static void t(Context context) {
-        Toast.makeText(context, "HALLO", Toast.LENGTH_LONG).show();
-    }
-
     public Btn(@NonNull Context context) {
 
         super(context);
@@ -90,6 +86,10 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
                 }
             }
         }
+    }
+
+    public Corners getCorners() {
+        return rounded;
     }
 
     @SuppressLint("DrawAllocation")
