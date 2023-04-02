@@ -35,7 +35,7 @@ import com.il4mb.co2.util.Co2Drawable;
 public class Co2Dialog extends DialogFragment {
 
     public static String TAG = "Co2Dialog";
-    private static View.OnClickListener onCLickPositive, onClickNegative;
+    private View.OnClickListener onCLickPositive, onClickNegative;
 
     public Co2Dialog() {}
 
