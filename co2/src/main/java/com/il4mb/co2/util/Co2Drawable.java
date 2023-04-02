@@ -18,7 +18,7 @@ public class Co2Drawable extends GradientDrawable {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        this.setColor(Color.RED);
+        this.setColor(color);
         this.setCornerRadii(new float[] {
                 corners.left_top, corners.left_top,
                 corners.right_top, corners.right_top,

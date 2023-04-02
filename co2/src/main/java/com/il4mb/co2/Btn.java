@@ -1,11 +1,15 @@
 package com.il4mb.co2;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,10 +20,7 @@ import com.il4mb.co2.util.Corners;
 public class Btn extends androidx.appcompat.widget.AppCompatButton {
 
     Corners rounded;
-
-    public static void t(Context context) {
-        Toast.makeText(context, "HALLO", Toast.LENGTH_LONG).show();
-    }
+    int Tcolor = Color.WHITE;
 
     public Btn(@NonNull Context context) {
 
@@ -47,6 +48,8 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
     }
 
     public void initAttrs(AttributeSet attrs) {
+
+        this.setPadding(25, 10, 25, 10);
 
         for (int i =0; i < attrs.getAttributeCount(); i++ ) {
 
@@ -91,12 +94,21 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
             }
         }
     }
-
     public void setCorners(Corners corners) {
         this.rounded = corners;
     }
     public Corners getCorners() {
         return rounded;
+    }
+
+    public void setBackgroundColor(ColorStateList colors) {
+        this.setBackgroundTintList(colors);
+    }
+
+    public void textColor(int color) {
+        this.Tcolor = color;
+        setTextColor(color);
+        invalidate();
     }
 
     @SuppressLint("DrawAllocation")
@@ -105,7 +117,7 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
         super.onDraw(canvas);
 
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.RED);
+        drawable.setColor(Color.GRAY);
         drawable.setCornerRadii(new float[] {
                 rounded.left_top, rounded.left_top,
                 rounded.right_top, rounded.right_top,
@@ -113,11 +125,27 @@ public class Btn extends androidx.appcompat.widget.AppCompatButton {
                 rounded.left_bottom, rounded.left_bottom
         });
 
-        setTextColor(Color.WHITE);
-
-
-        this.setPadding(25, 10, 25, 10);
+        //setTextColor(Tcolor);
 
         this.setBackground(drawable);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            this.animate()
+                    .scaleYBy(0.1f)
+                    .scaleXBy(0.1f)
+                    .setDuration(250)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            Btn.this.setScaleX(1);
+                            Btn.this.setScaleY(1);
+                        }
+                    }).start();
+        }
+        return super.onTouchEvent(event);
     }
 }

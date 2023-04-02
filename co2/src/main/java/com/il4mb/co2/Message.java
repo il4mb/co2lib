@@ -17,11 +17,7 @@ import android.widget.Toast;
 
 import com.il4mb.co2.util.Co2Corners;
 import com.il4mb.co2.util.Co2Drawable;
-import com.il4mb.co2.util.Corners;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.il4mb.co2.util.Theme;
 
 public final class Message {
 
@@ -62,7 +58,8 @@ public final class Message {
         vtext.setVisibility(View.GONE);
 
     }
-    public void setTheme(Message.Theme theme) {
+
+    public void setTheme(Theme theme) {
 
         this.theme = theme;
     }
@@ -71,7 +68,7 @@ public final class Message {
 
         this.title = title;
         this.text = text;
-        this.setTheme(Message.Theme.DANGER());
+        this.setTheme(Theme.DANGER());
         this.show();
     }
 
@@ -79,13 +76,13 @@ public final class Message {
 
         this.title = title;
         this.text = text;
-        this.setTheme(Message.Theme.PRIMARY());
+        this.setTheme(Theme.PRIMARY());
         this.show();
     }
 
     public void show() {
 
-        if(this.theme == null) {
+        if (this.theme == null) {
             this.theme = Theme.DEFAULT();
         }
 
@@ -96,12 +93,12 @@ public final class Message {
         drawable.setTintList(ColorStateList.valueOf(this.theme.Background));
         vlayout.setBackground(drawable);
 
-        if(this.title != null) {
+        if (this.title != null) {
             vtitle.setVisibility(View.VISIBLE);
             vtitle.setText(this.title);
             vlayout.addView(vtitle);
         }
-        if(this.text != null) {
+        if (this.text != null) {
             vtext.setVisibility(View.VISIBLE);
             vtext.setText(this.text);
             vlayout.addView(vtext);
@@ -120,6 +117,7 @@ public final class Message {
 
     public static class Builder {
         Message msg;
+
         public Builder(Context context) {
             msg = new Message(context);
         }
@@ -128,92 +126,21 @@ public final class Message {
             msg.title = title;
             return this;
         }
+
         public Builder setText(String text) {
             msg.text = text;
             return this;
         }
+
         public Builder setTheme(Theme theme) {
             msg.setTheme(theme);
             return this;
         }
+
         public void show() {
             msg.show();
         }
     }
-    public static final class Theme {
 
-        public int Title, Text, Background;
-        public Theme(final int color) {
-
-            int red = Color.red(color);
-            int green = Color.green(color);
-            int blue = Color.blue(color);
-
-            Title = Color.argb(255, red, green, blue);
-            Text = Color.argb(180, red, green, blue);
-
-            // GENERATE BG COLOR
-            int[] colors = {red, green, blue};
-            List<Integer> list = Arrays.stream(colors).boxed().collect(Collectors.toList());
-            int total = Arrays.stream(colors).sum();
-            int max = Arrays.stream(colors).max().orElse(0);
-            int maxI = list.indexOf(max);
-            int average = (int) Arrays.stream(colors).average().orElse(255);
-
-            if(total > 382) {
-                // TEXT TERANG
-                if(max < 150) {
-                    for (int i = 0; i < colors.length; i++) {
-                        colors[i] = 255 - colors[i];
-                    }
-                } else {
-                    for (int i = 0; i < colors.length; i++) {
-
-                        colors[i] = (int) (colors[i]/2.5);
-                    }
-                    //colors[maxI] = max;
-                }
-            }
-            else {
-                // TEXT GELAP
-                if(max < 150) {
-                    for (int i = 0; i < colors.length; i++) {
-                        colors[i] = 255 - colors[i];
-                    }
-                } else {
-                    for (int i = 0; i < colors.length; i++) {
-                        if(max > 175) {
-                            if(max > 250)
-                                colors[i] = max - 15;
-                            else
-                                colors[i] = 255 - 15;
-                        } else {
-                            if (colors[i] < max) {
-                                colors[i] = (255 - colors[i]);
-                            }
-                        }
-                    }
-                    if(max > 175)
-                        colors[maxI] = max + (255 - max);
-                }
-            }
-
-            this.Background = Color.rgb(colors[0], colors[1], colors[2]);
-        }
-        public static Theme DEFAULT(){
-            return new Theme(Color.parseColor("#515151"));
-        }
-        public static Theme PRIMARY(){
-            return new Theme(Color.parseColor("#0043DF"));
-        }
-        public static Theme WARNING(){
-            return new Theme(Color.parseColor("#ffcb2e"));
-        }
-        public static Theme DANGER(){
-            return new Theme(Color.parseColor("#ff2e51"));
-        }
-        public static Theme SUCCESS(){
-            return new Theme(Color.parseColor("#2cbf47"));
-        }
-    }
 }
+

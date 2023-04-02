@@ -11,9 +11,36 @@ public class Co2Corners {
     public int right_top;
     public int right_bottom;
     int bottom;
-    public Co2Corners(int round) {
-        setAll(round);
+    public Co2Corners(int all) {
+        setAll(all);
     }
+    public Co2Corners(int left, int top, int right, int bottom) {
+        setLeft(left);
+        setTop(top);
+        setRight(right);
+        setBottom(bottom);
+    }
+    public Co2Corners(int left,
+                      int left_top,
+                      int left_bottom,
+                      int top,
+                      int right,
+                      int right_top,
+                      int right_bottom,
+                      int bottom) {
+        setLeft(left);
+        setTop(top);
+        setRight(right);
+        setBottom(bottom);
+
+        setLeft_top(left_top);
+        setLeft_bottom(left_bottom);
+        setRight_top(right_top);
+        setRight_bottom(right_bottom);
+
+
+    }
+
     public void setAll(int xr) {
         this.left = xr;
         this.top = xr;

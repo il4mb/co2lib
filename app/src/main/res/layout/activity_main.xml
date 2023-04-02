@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.il4mb.co2lib.Btn
+        <com.il4mb.co2.Btn
+            android:id="@+id/action_btn"
             android:layout_gravity="center"
             app:rounded="1000"
             android:layout_width="wrap_content"
