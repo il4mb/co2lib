@@ -132,6 +132,12 @@ public class Co2Dialog extends DialogFragment {
         void onRender(Layout layout);
     }
 
+    @Nullable
+    @Override
+    public Dialog getDialog() {
+        return super.getDialog();
+    }
+
     public static class Layout extends LinearLayout {
         public int corners = 12;
         private Btn positiveBtn, negativeBtn;
