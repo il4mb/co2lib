@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -136,7 +137,7 @@ public class Co2Dialog extends DialogFragment {
         public int corners = 12;
         private Btn positiveBtn, negativeBtn;
         LinearLayout layout, footer;
-        ScrollView body;
+        FrameLayout body;
 
         int bgColor;
 
@@ -171,7 +172,7 @@ public class Co2Dialog extends DialogFragment {
 
             layout.setBackground(new Co2Drawable(bgColor, new Co2Corners(corners)));
 
-            body = new ScrollView(context);
+            body = new FrameLayout(context);
             body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,1));
             body.setPadding(35, 35, 35, 5);
 
@@ -212,7 +213,7 @@ public class Co2Dialog extends DialogFragment {
             this.addView(layout);
 
         }
-        public ScrollView getBody() {
+        public FrameLayout getBody() {
             return body;
         }
 
