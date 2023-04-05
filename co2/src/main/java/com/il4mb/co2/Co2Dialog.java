@@ -132,12 +132,6 @@ public class Co2Dialog extends DialogFragment {
         void onRender(Layout layout);
     }
 
-    @Nullable
-    @Override
-    public Dialog getDialog() {
-        return super.getDialog();
-    }
-
     public static class Layout extends LinearLayout {
         public int corners = 12;
         private Btn positiveBtn, negativeBtn;
@@ -178,11 +172,10 @@ public class Co2Dialog extends DialogFragment {
             layout.setBackground(new Co2Drawable(bgColor, new Co2Corners(corners)));
 
             body = new ScrollView(context);
-            body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            body.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,1));
             body.setPadding(35, 35, 35, 5);
 
             footer = new LinearLayout(context);
-            footer.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
             footer.setBackground(new Co2Drawable(Color.TRANSPARENT, new Co2Corners(0,0,corners,0,0,0,corners,0)));
             footer.setGravity(Gravity.RIGHT);
 
