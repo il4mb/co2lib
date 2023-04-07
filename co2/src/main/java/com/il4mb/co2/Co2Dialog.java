@@ -49,7 +49,7 @@ public class Co2Dialog extends DialogFragment {
     Ilayout ilayout;
     Layout layout;
     boolean is_touch_in_layout = false;
-
+    ViewGroup.LayoutParams layoutParams;
     public void setMax_height(int max_height) {
         this.max_height = max_height;
     }
@@ -58,10 +58,17 @@ public class Co2Dialog extends DialogFragment {
         this.max_width = max_width;
     }
 
+    public void setLayoutParams(ViewGroup.LayoutParams layoutParams) {
+        this.layoutParams = layoutParams;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        if(this.layoutParams == null) {
+            this.layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
         layout = new Layout(getContext());
         return layout;
     }
@@ -100,11 +107,11 @@ public class Co2Dialog extends DialogFragment {
         getDialog().setOnShowListener(dialogInterface -> {
 
             if(max_width > 0 && getDialog().getWindow().getDecorView().getWidth() > max_width) {
-                getDialog().getWindow().setLayout(max_width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                getDialog().getWindow().setLayout(max_width, layoutParams.height);
             }
 
             if(max_height > 0 && getDialog().getWindow().getDecorView().getHeight() > max_height) {
-                getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, max_height);
+                getDialog().getWindow().setLayout(layoutParams.width, max_height);
             }
 
             layout.layout.setAlpha(1);
