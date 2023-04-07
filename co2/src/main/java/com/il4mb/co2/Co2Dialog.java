@@ -80,6 +80,7 @@ public class Co2Dialog extends DialogFragment {
 
         layout.setOnClickListener(v-> is_touch_in_layout = true);
 
+        getDialog().getWindow().setLayout(layoutParams.width, layoutParams.height);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().setCanceledOnTouchOutside(false);
         getDialog().getWindow().getDecorView().setOnTouchListener((view1, motionEvent) -> {
