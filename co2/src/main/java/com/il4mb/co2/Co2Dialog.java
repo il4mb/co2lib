@@ -45,8 +45,19 @@ public class Co2Dialog extends DialogFragment {
         return new Co2Dialog();
     }
 
+    private int max_width=0, max_height=0;
     Ilayout ilayout;
     Layout layout;
+    boolean is_touch_in_layout = false;
+
+    public void setMax_height(int max_height) {
+        this.max_height = max_height;
+    }
+
+    public void setMax_width(int max_width) {
+        this.max_width = max_width;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +66,6 @@ public class Co2Dialog extends DialogFragment {
         return layout;
     }
 
-    boolean is_touch_in_layout = false;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -65,30 +75,39 @@ public class Co2Dialog extends DialogFragment {
 
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().setCanceledOnTouchOutside(false);
-        getDialog().getWindow().getDecorView().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+        getDialog().getWindow().getDecorView().setOnTouchListener((view1, motionEvent) -> {
 
 
-                if(! is_touch_in_layout) {
+            if(! is_touch_in_layout) {
 
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        layout.animate()
-                                .scaleYBy(0.05f)
-                                .scaleXBy(0.05f)
-                                .setDuration(100)
-                                .setListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-                                        layout.setScaleY(1);
-                                        layout.setScaleX(1);
-                                    }
-                                });
-                    }
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    layout.animate()
+                            .scaleYBy(0.05f)
+                            .scaleXBy(0.05f)
+                            .setDuration(100)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    layout.setScaleY(1);
+                                    layout.setScaleX(1);
+                                }
+                            });
                 }
-                is_touch_in_layout = false;
-                return false;
             }
+            is_touch_in_layout = false;
+            return false;
+        });
+        getDialog().setOnShowListener(dialogInterface -> {
+
+            if(max_width > 0 && getDialog().getWindow().getDecorView().getWidth() > max_width) {
+                getDialog().getWindow().setLayout(max_width, ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+
+            if(max_height > 0 && getDialog().getWindow().getDecorView().getHeight() > max_height) {
+                getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, max_height);
+            }
+
+            layout.layout.setAlpha(1);
         });
 
         if(onClickNegative == null) {
@@ -169,6 +188,7 @@ public class Co2Dialog extends DialogFragment {
             layout.setLayoutParams(layoutParams);
             layout.setMinimumWidth(600);
             layout.setMinimumHeight(200);
+            layout.setAlpha(0);
 
             layout.setBackground(new Co2Drawable(bgColor, new Co2Corners(corners)));
 
