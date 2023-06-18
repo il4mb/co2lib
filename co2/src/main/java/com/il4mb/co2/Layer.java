@@ -206,8 +206,6 @@ public class Layer extends DialogFragment {
 
     private void clearCurrentGesture(MotionEvent event) {
 
-        int colorBg = ((GradientDrawable)layout.getBackground()).getColor().getDefaultColor();
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getDialog().getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -219,7 +217,7 @@ public class Layer extends DialogFragment {
         }
 
         layout.setY(height - layout.getMaxHeight());
-        this.layout.getBackground().setTint(colorBg);
+        layout.setAlpha(1f);
     }
 
     private void gestureToDown(MotionEvent event) {
@@ -241,19 +239,11 @@ public class Layer extends DialogFragment {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
             {
 
-                Color x = Color.valueOf(colorBg);
-
-                float r     = (x.red()   * 0.5f);
-                float g     = (x.green() * 0.5f);
-                float b     = (x.blue()  * 0.5f);
-
-                Color c = Color.valueOf(r, g, b);
-
-                this.layout.getBackground().setTint(c.toArgb());
+                layout.setAlpha(0.5f);
 
             }
         } else {
-            this.layout.getBackground().setTint(colorBg);
+            layout.setAlpha(1f);
         }
 
     }
