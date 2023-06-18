@@ -206,7 +206,7 @@ public class Layer extends DialogFragment {
 
     private void clearCurrentGesture(MotionEvent event) {
 
-        int colorBg = ((ColorDrawable)layout.getBackground()).getColor();
+        int colorBg = ((GradientDrawable)layout.getBackground()).getColor().getDefaultColor();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getDialog().getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -224,7 +224,7 @@ public class Layer extends DialogFragment {
 
     private void gestureToDown(MotionEvent event) {
 
-        int colorBg = ((ColorDrawable)layout.getBackground()).getColor();
+        int colorBg = ((GradientDrawable)layout.getBackground()).getColor().getDefaultColor();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getDialog().getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
