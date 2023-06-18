@@ -38,12 +38,12 @@ import java.util.concurrent.TimeUnit;
 public class Layer extends DialogFragment {
 
     private static boolean readyToShow = true;
-    LinearLayout.LayoutParams layoutParams;
-    ConstraintLayout layout, wrapper;
-    LinearLayout container;
-    LinearLayout topElement;
-    TextView title;
-    Context context;
+    public LinearLayout.LayoutParams layoutParams;
+    public ConstraintLayout layout, wrapper;
+    public LinearLayout container;
+    public LinearLayout topElement;
+    public TextView title;
+    public Context context;
 
     public Layer() {}
 
