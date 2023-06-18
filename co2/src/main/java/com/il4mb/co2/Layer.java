@@ -206,6 +206,8 @@ public class Layer extends DialogFragment {
 
     private void clearCurrentGesture(MotionEvent event) {
 
+        int colorBg = ((ColorDrawable)layout.getBackground()).getColor();
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getDialog().getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -217,10 +219,12 @@ public class Layer extends DialogFragment {
         }
 
         layout.setY(height - layout.getMaxHeight());
-        this.layout.getBackground().setTint(Color.WHITE);
+        this.layout.getBackground().setTint(colorBg);
     }
 
     private void gestureToDown(MotionEvent event) {
+
+        int colorBg = ((ColorDrawable)layout.getBackground()).getColor();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getDialog().getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -231,11 +235,25 @@ public class Layer extends DialogFragment {
         if(rawY < 200) {
             clearCurrentGesture(event);
         }
+
         if(rawY > (height/2.2)) {
 
-            this.layout.getBackground().setTint(Color.parseColor("#AAAAAA"));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+            {
+
+                Color x = Color.valueOf(colorBg);
+
+                float r     = (x.red()   * 0.5f);
+                float g     = (x.green() * 0.5f);
+                float b     = (x.blue()  * 0.5f);
+
+                Color c = Color.valueOf(r, g, b);
+
+                this.layout.getBackground().setTint(c.toArgb());
+
+            }
         } else {
-            this.layout.getBackground().setTint(Color.WHITE);
+            this.layout.getBackground().setTint(colorBg);
         }
 
     }
